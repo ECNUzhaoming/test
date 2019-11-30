@@ -1,87 +1,84 @@
-
-# coding: utf-8
-
-# In[2]:
-
-import tkinter as tk
-import time
+from turtle import *
+from time import sleep
 
 
-def processButton():
-
-    if v1.get() == 1:
-        #print text.get("0.0", "end")
-       # t= text.get("0.0", "2.0")
-        #print t
-        window2 = tk.Tk()  # 创建一个窗口
-        window2.title("result")  # 设置标题
-        text2 = tk.Text(window2)
-        text2.pack()
-        text2.insert('end','T1\n')
-
-        text2.insert('end', 'R1')
-        #text2.insert('end',t)
-    else:
-        t=text.get("0.0", "end")
-        window2 = tk.Tk()  # 创建一个窗口
-        window2.title("result")  # 设置标题
-        text2 = tk.Text(window2)
-        text2.pack()
-        time.sleep(15)
-        text2.insert('end', 'T1'
-+'\nR2'
-+'\nT2'
-+'\nR2')
-window = tk.Tk()  # 创建一个窗口
-window.title("Demo")  # 设置标题
-frame1 = tk.Frame(window)  # 创建一个框架
-frame1.pack()  # 将框架frame1放置在window中
-text = tk.Text(window)
-text.pack()
-v1 =tk. IntVar()
-rbDanju = tk.Radiobutton(frame1, text="单句分析",
-                            variable=v1, value=1,
-                            )
-rbPiliang =tk. Radiobutton(frame1, text="批量分析",
-                               variable=v1, value=2,
-                               )
-rbFenxi = tk.Button(frame1, text="分析", command = processButton)
-        # grid布局
-rbDanju.grid(row=1, column=1)
-rbPiliang.grid(row=1, column=2)
-rbFenxi.grid(row=1,column=3)
-frame2 =tk. Frame(window)  # 创建框架frame2
-frame2.pack()  # 将frame2放置在window中
-        # 创建消息
-l1=tk.Label(frame2, text="单句分析只分析文本第一行",justify='left')
-        # grid布局
-l1.grid(sticky=tk.E)
-        # 监测事件直到window被关闭
-window.mainloop()
-v1 =tk. IntVar()
-rbDanju = tk.Radiobutton(frame1, text="单句分析",
-                            variable=v1, value=1,
-                            )
-rbPiliang =tk. Radiobutton(frame1, text="批量分析",
-                               variable=v1, value=2,
-                               )
-rbFenxi = tk.Button(frame1, text="分析", command = processButton)
-        # grid布局
-rbDanju.grid(row=1, column=1)
-rbPiliang.grid(row=1, column=2)
-rbFenxi.grid(row=1,column=3)
-frame2 =tk. Frame(window)  # 创建框架frame2
-frame2.pack()  # 将frame2放置在window中
-        # 创建消息
-l1=tk.Label(frame2, text="单句分析只分析文本第一行",justify='left')
-        # grid布局
-l1.grid(sticky=tk.E)
-        # 监测事件直到window被关闭
-window.mainloop()
+def go_to(x, y):
+    up()
+    goto(x, y)
+    down()
 
 
+def big_Circle(size):  # 函数用于绘制心的大圆
+    speed(1)
+    for i in range(150):
+        forward(size)
+        right(0.3)
 
-# In[ ]:
+
+def small_Circle(size):  # 函数用于绘制心的小圆
+    speed(1)
+    for i in range(210):
+        forward(size)
+        right(0.786)
 
 
+def line(size):
+    speed(1)
+    forward(51 * size)
 
+
+def heart(x, y, size):
+    go_to(x, y)
+    left(150)
+    begin_fill()
+    line(size)
+    big_Circle(size)
+    small_Circle(size)
+    left(120)
+    small_Circle(size)
+    big_Circle(size)
+    line(size)
+    end_fill()
+
+
+def arrow():
+    pensize(10)
+    setheading(0)
+    go_to(-400, 0)
+    left(15)
+    forward(150)
+    go_to(339, 178)
+    forward(150)
+
+
+def arrowHead():
+    pensize(1)
+    speed(1)
+    color('red', 'red')
+    begin_fill()
+    left(120)
+    forward(20)
+    right(150)
+    forward(35)
+    right(120)
+    forward(35)
+    right(150)
+    forward(20)
+    end_fill()
+
+
+def main():
+    pensize(2)
+    color('red', 'pink')
+    # getscreen().tracer(30, 0) #取消注释后，快速显示图案
+    heart(200, 0, 1)  # 画出第一颗心，前面两个参数控制心的位置，函数最后一个参数可控制心的大小
+    setheading(0)  # 使画笔的方向朝向x轴正方向
+    heart(-80, -100, 1.5)  # 画出第二颗心
+    arrow()  # 画出穿过两颗心的直线
+    arrowHead()  # 画出箭的箭头
+    go_to(400, -300)
+    write("author：520Python", move=True, align="left", font=("宋体", 30, "normal"))
+    done()
+
+
+main()
